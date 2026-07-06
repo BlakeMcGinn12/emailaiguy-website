@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EmailAIguy | Train Your Agent on Email</title>
+    <meta
+      name="description"
+      content="Copy a prompt to install Email Swipe. Train your AI agent on how you triage inbox email — spam, keep, important."
+    />
+    <meta property="og:title" content="EmailAIguy | Train Your Agent on Email" />
+    <meta
+      property="og:description"
+      content="Copy a prompt to install Email Swipe. Train your AI agent on how you triage inbox email."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="/assets/header.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@EmailAIguy" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="icon" href="assets/profile.png" type="image/png" />
+  </head>
+  <body>
+    <div class="page">
+      <header class="hero">
+        <div class="hero-banner">
+          <img src="assets/header.png" alt="" class="hero-banner-img" width="1500" height="500" />
+        </div>
+        <div class="hero-inner">
+          <div class="hero-profile-wrap">
+            <img
+              src="assets/profile.png"
+              alt="EmailAIguy"
+              class="hero-profile"
+              width="120"
+              height="120"
+            />
+          </div>
+          <div class="hero-text">
+            <h1 class="hero-title">EmailAIguy</h1>
+            <p class="hero-tagline">AI in email, without the doom spiral</p>
+            <a
+              class="hero-x-link"
+              href="https://x.com/EmailAIguy"
+              target="_blank"
+              rel="noopener noreferrer"
+              >@EmailAIguy</a
+            >
+          </div>
+        </div>
+      </header>
+
+      <main class="main">
+        <section class="section">
+          <p class="eyebrow">Free skill</p>
+          <h2 class="headline">Train your agent on how you read email.</h2>
+          <p class="lede">
+            Email Swipe is a Tinder-style inbox trainer. Swipe spam, keep, or flag what matters — your
+            agent learns from the patterns, not a giant preferences dump.
+          </p>
+
+          <div class="prompt-card">
+            <div class="prompt-card-top">
+              <div>
+                <p class="prompt-label">Paste this into your agent</p>
+                <p class="prompt-hint">Cursor, OpenClaw, Claude — your agent finds the rest on GitHub</p>
+              </div>
+              <button type="button" class="copy-btn" id="copy-btn" aria-live="polite">
+                <span class="copy-btn-icon" aria-hidden="true">⎘</span>
+                <span id="copy-btn-text">Copy prompt</span>
+              </button>
+            </div>
+            <pre class="prompt-text" id="agent-prompt">Install Email Swipe from github.com/EmailGuy42069/email-swipe and help me train my agent on how I triage inbox email.</pre>
+          </div>
+
+          <p class="fine-print">
+            Open source on
+            <a href="https://github.com/EmailGuy42069/email-swipe" target="_blank" rel="noopener noreferrer"
+              >GitHub</a
+            >. No account required. Your swipes stay local.
+          </p>
+        </section>
+
+        <section class="section thesis-card">
+          <h2 class="thesis-headline">Email is becoming a space of perfect information.</h2>
+          <div class="thesis-body">
+            <p>
+              Most people assume AI in email means more spam — louder blasts, worse filters, everyone
+              shouting at once. The counterintuitive part: both sides of the inbox get smarter at the
+              same time.
+            </p>
+            <p>
+              <strong>On the consumer side,</strong> AI sorting gets better at knowing what you actually
+              want. Your inbox stops being a firehose. Noise gets filtered before it lands. What reaches
+              you is increasingly mail that matches your interests — not because senders sent less, but
+              because the wrong messages never show up.
+            </p>
+            <p>
+              <strong>On the business side,</strong> personalization replaces one-size-fits-all blasts.
+              Senders learn what each audience segment cares about and tailor messages to real interests —
+              not fake merge tags, but relevance built from how people actually engage.
+            </p>
+            <p>
+              When sorting gets sharper and sending gets more specific, email becomes a high-signal channel
+              for everyone. That&apos;s the opportunity — not more volume, but better matching on both
+              ends.
+            </p>
+          </div>
+          <a
+            class="secondary-btn"
+            href="https://x.com/EmailAIguy"
+            target="_blank"
+            rel="noopener noreferrer"
+            >Follow on X ↗</a
+          >
+        </section>
+
+        <section class="section consult">
+          <p class="consult-text">
+            Building email systems, agent workflows, or audience personalization for your team?
+          </p>
+          <a
+            class="consult-link"
+            href="https://calendly.com/blake-blakemcginn/30min"
+            target="_blank"
+            rel="noopener noreferrer"
+            >Book a consultation with Blake ↗</a
+          >
+        </section>
+      </main>
+
+      <footer class="footer">
+        <a href="https://blakemcginn.com">blakemcginn.com</a>
+      </footer>
+    </div>
+
+    <script>
+      const promptEl = document.getElementById("agent-prompt");
+      const copyBtn = document.getElementById("copy-btn");
+      const copyBtnText = document.getElementById("copy-btn-text");
+
+      copyBtn.addEventListener("click", async () => {
+        const text = promptEl.textContent.trim();
+        try {
+          await navigator.clipboard.writeText(text);
+        } catch {
+          const ta = document.createElement("textarea");
+          ta.value = text;
+          ta.style.position = "fixed";
+          ta.style.opacity = "0";
+          document.body.appendChild(ta);
+          ta.select();
+          document.execCommand("copy");
+          document.body.removeChild(ta);
+        }
+        copyBtnText.textContent = "Copied";
+        copyBtn.classList.add("copied");
+        window.setTimeout(() => {
+          copyBtnText.textContent = "Copy prompt";
+          copyBtn.classList.remove("copied");
+        }, 2200);
+      });
+    </script>
+  </body>
+</html>
