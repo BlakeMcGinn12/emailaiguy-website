@@ -10,12 +10,20 @@ python3 -m http.server 8080
 
 Open http://localhost:8080
 
-## Deploy
+## Deploy (Render)
 
-Static site — deploy the repo root to any static host (Render static site, GitHub Pages, Cloudflare Pages, etc.). No build step.
+Connected repo: **BlakeMcGinn12/emailaiguy-website**
 
-- **Publish directory:** `/` (root)
-- **Index:** `index.html`
+- **Service:** `emailaiguy-website` (static site)
+- **Publish directory:** `.` (repo root)
+- **Build command:** `echo "Static site — no build"` (or leave blank)
+- **Live URLs:** https://emailaiguy.com · https://www.emailaiguy.com · https://emailaiguy-website.onrender.com
+
+`render.yaml` in this repo documents the Render config. Pushes to `main` auto-deploy when connected in the Render dashboard.
+
+### Manual deploy trigger
+
+Render Dashboard → **emailaiguy-website** → **Manual Deploy** → Deploy latest commit.
 
 ## Structure
 
