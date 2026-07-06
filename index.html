@@ -83,71 +83,127 @@
           </p>
 
           <div class="skill-details">
-            <p class="skill-details-label">What's going on under the hood?</p>
+            <p class="skill-details-label">Under the hood</p>
 
             <details class="detail-item">
-              <summary class="detail-summary">Smart queue — uncertain mail first</summary>
+              <summary class="detail-summary">Memory contract: preferences.json → training-pack.json</summary>
               <div class="detail-body">
                 <p>
-                  The swipe deck isn't random. As you train, it scores each email by how unsure it is
-                  about your taste — ambiguous senders and edge cases float to the top. Stuff it already
-                  gets (same domain you spammed three times) can batch-confirm so you're not swiping
-                  the same junk forever.
+                  Two artifacts, two jobs. <code>preferences.json</code> is raw training data — every
+                  swipe, metadata, correction notes. <code>training-pack.json</code> is the
+                  agent-facing memory: a compact, curated artifact your agent reads at runtime.
+                </p>
+                <p>
+                  The agent never has to ingest a noisy swipe log. Lossy compression in the right
+                  direction: ~12 diverse examples plus stable rules, not 500 raw decisions. MCP
+                  (<code>watch-preferences.py</code>) exposes only the distilled pack.
                 </p>
               </div>
             </details>
 
             <details class="detail-item">
-              <summary class="detail-summary">Training pack — not a bloated export</summary>
+              <summary class="detail-summary">Compiler: swipes → domain model</summary>
               <div class="detail-body">
                 <p>
-                  Your swipes compile into <code>training-pack.json</code> — a small file your agent
-                  actually reads at runtime. Examples, watch rules, label ideas. Not your entire swipe
-                  history dumped into a prompt.
+                  <code>analyze-preferences.py</code> compiles behavior into abstractions, not just
+                  stored history:
+                </p>
+                <ul>
+                  <li>Diverse few-shot examples (<code>select_diverse_examples()</code>)</li>
+                  <li>Sender / domain patterns from grouped swipes</li>
+                  <li>Needs Attention watch rules → <code>agent-watchlist.json</code></li>
+                  <li>Safe label candidates → <code>platform-rules.json</code> (inbox preserved)</li>
+                  <li>Folder proposals → <code>folder-suggestions.json</code></li>
+                </ul>
+                <p>
+                  Not brittle prompt stuffing — a small domain model compiled from user behavior.
                 </p>
               </div>
             </details>
 
             <details class="detail-item">
-              <summary class="detail-summary">Platform rules — suggest, never hide</summary>
+              <summary class="detail-summary">Truthful memory + captured uncertainty</summary>
               <div class="detail-body">
                 <p>
-                  Gmail/Outlook label suggestions come from your patterns — but nothing auto-applies.
-                  Mail stays in your inbox until you say so. No silent filters, no "trust me" archive
-                  rules. The inbox stays sacred.
+                  Examples store the user's actual decision and optional correction note — no
+                  fabricated post-hoc reasoning. Mixed decisions on the same sender become
+                  <code>inconsistentSenders</code>, which is a better signal for an agent than
+                  pretending every pattern is clean.
+                </p>
+                <p>
+                  <code>runtimeGuidance</code> ships alongside memory: token budget advice, never
+                  auto-delete, never skip inbox without approval. Memory encodes what you like
+                  <em>and</em> how the agent must behave safely.
                 </p>
               </div>
             </details>
 
             <details class="detail-item">
-              <summary class="detail-summary">Agent watchlist — Needs Attention folder</summary>
+              <summary class="detail-summary">Active-learning queue</summary>
               <div class="detail-body">
                 <p>
-                  Double-tap and spam patterns teach an agent what counts as urgent for <em>you</em>.
-                  Later it scans metadata (from, subject, date) and surfaces candidates into a Needs
-                  Attention folder — reasoning layer, not a dumb keyword filter.
+                  <code>orderEmailQueue()</code> in <code>app.js</code> scores mail by uncertainty
+                  and urgency — not chronological order. Prior swipes by domain plus keyword hints
+                  push the next best training example to the front.
+                </p>
+                <p>
+                  Inline hints calibrate trust: “Similar to 3 you marked spam” when confidence is
+                  high; “Help me learn this one” when it's fuzzy. Batch spam only offers after you
+                  manually spam one, siblings share the domain, <em>and</em> the model would guess
+                  spam independently — earned shortcut, not reckless automation.
                 </p>
               </div>
             </details>
 
             <details class="detail-item">
-              <summary class="detail-summary">Token-efficient runtime</summary>
+              <summary class="detail-summary">Victory screen = correction loop</summary>
               <div class="detail-body">
                 <p>
-                  Local rules run first — domain patterns, keywords, your watchlist. The LLM only
-                  weighs in on what's still ambiguous. Cheaper, faster, and your agent isn't re-reading
-                  200 swipes every time it checks mail.
+                  Session end isn't just polish. The victory screen shows pile breakdown, grades
+                  scorable predictions, surfaces misses, and captures correction notes — review at
+                  the moment you still have context. That feedback feeds better training on the
+                  next compile.
                 </p>
               </div>
             </details>
 
             <details class="detail-item">
-              <summary class="detail-summary">Local-first privacy</summary>
+              <summary class="detail-summary">Human-in-the-loop automation</summary>
               <div class="detail-body">
                 <p>
-                  The swipe UI never talks to your email provider directly. Your agent injects a batch,
-                  you swipe locally, preferences save on your machine. Treat the export like sensitive
-                  data — it has real subject lines and senders.
+                  Platform rules are <code>suggest_only</code>: labels and stars are fine; skipping
+                  the inbox is not. Needs Attention is agent-managed reasoning, not a hidden Gmail
+                  filter. Helpful automation without silent control loss.
+                </p>
+                <p>
+                  Runtime: metadata fetch → local rule match from <code>platform-rules.json</code> (no
+                  LLM) → watchlist pre-filter → LLM only for remaining ambiguous candidates.
+                </p>
+              </div>
+            </details>
+
+            <details class="detail-item">
+              <summary class="detail-summary">Architecture layers</summary>
+              <div class="detail-body">
+                <ul>
+                  <li>
+                    <strong>UI</strong> — captures actions; IndexedDB locally;
+                    <code>serve-ui.py</code> → <code>~/.config/email-swipe/preferences.json</code>
+                  </li>
+                  <li>
+                    <strong>Compiler</strong> — <code>import-preferences.py</code> /
+                    <code>analyze-preferences.py</code> derives memory
+                  </li>
+                  <li>
+                    <strong>MCP</strong> — <code>get_training_pack</code>,
+                    <code>get_watch_rules</code>; agent sees distilled artifact only
+                  </li>
+                </ul>
+                <p>
+                  <code>baseline-predictions.js</code> gives heuristic predictions from email #1;
+                  learned behavior takes over as swipes accumulate. Export falls back to download if
+                  local save isn't available; compiler runs from preferences if the pack doesn't exist
+                  yet. Graceful degradation across paths.
                 </p>
               </div>
             </details>
