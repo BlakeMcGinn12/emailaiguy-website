@@ -81,6 +81,77 @@
               >GitHub</a
             >. Free. Your swipes stay on your machine.
           </p>
+
+          <div class="skill-details">
+            <p class="skill-details-label">What's going on under the hood?</p>
+
+            <details class="detail-item">
+              <summary class="detail-summary">Smart queue — uncertain mail first</summary>
+              <div class="detail-body">
+                <p>
+                  The swipe deck isn't random. As you train, it scores each email by how unsure it is
+                  about your taste — ambiguous senders and edge cases float to the top. Stuff it already
+                  gets (same domain you spammed three times) can batch-confirm so you're not swiping
+                  the same junk forever.
+                </p>
+              </div>
+            </details>
+
+            <details class="detail-item">
+              <summary class="detail-summary">Training pack — not a bloated export</summary>
+              <div class="detail-body">
+                <p>
+                  Your swipes compile into <code>training-pack.json</code> — a small file your agent
+                  actually reads at runtime. Examples, watch rules, label ideas. Not your entire swipe
+                  history dumped into a prompt.
+                </p>
+              </div>
+            </details>
+
+            <details class="detail-item">
+              <summary class="detail-summary">Platform rules — suggest, never hide</summary>
+              <div class="detail-body">
+                <p>
+                  Gmail/Outlook label suggestions come from your patterns — but nothing auto-applies.
+                  Mail stays in your inbox until you say so. No silent filters, no "trust me" archive
+                  rules. The inbox stays sacred.
+                </p>
+              </div>
+            </details>
+
+            <details class="detail-item">
+              <summary class="detail-summary">Agent watchlist — Needs Attention folder</summary>
+              <div class="detail-body">
+                <p>
+                  Double-tap and spam patterns teach an agent what counts as urgent for <em>you</em>.
+                  Later it scans metadata (from, subject, date) and surfaces candidates into a Needs
+                  Attention folder — reasoning layer, not a dumb keyword filter.
+                </p>
+              </div>
+            </details>
+
+            <details class="detail-item">
+              <summary class="detail-summary">Token-efficient runtime</summary>
+              <div class="detail-body">
+                <p>
+                  Local rules run first — domain patterns, keywords, your watchlist. The LLM only
+                  weighs in on what's still ambiguous. Cheaper, faster, and your agent isn't re-reading
+                  200 swipes every time it checks mail.
+                </p>
+              </div>
+            </details>
+
+            <details class="detail-item">
+              <summary class="detail-summary">Local-first privacy</summary>
+              <div class="detail-body">
+                <p>
+                  The swipe UI never talks to your email provider directly. Your agent injects a batch,
+                  you swipe locally, preferences save on your machine. Treat the export like sensitive
+                  data — it has real subject lines and senders.
+                </p>
+              </div>
+            </details>
+          </div>
         </section>
 
         <section class="section dichotomy">

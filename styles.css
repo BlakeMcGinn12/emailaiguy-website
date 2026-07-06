@@ -233,6 +233,110 @@ a {
   color: var(--blue-600);
 }
 
+/* Skill detail dropdowns */
+.skill-details {
+  margin-top: 2rem;
+  border-top: 1px dashed var(--blue-200);
+  padding-top: 1.25rem;
+}
+
+.skill-details-label {
+  margin: 0 0 0.75rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.detail-item {
+  border: 1px solid var(--blue-100);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.7);
+  overflow: hidden;
+}
+
+.detail-item + .detail-item {
+  margin-top: 0.5rem;
+}
+
+.detail-item[open] {
+  border-color: var(--blue-200);
+  background: #fff;
+  box-shadow: 0 4px 16px rgba(45, 106, 168, 0.06);
+}
+
+.detail-summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.85rem 1rem;
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--blue-900);
+  cursor: pointer;
+  list-style: none;
+  user-select: none;
+}
+
+.detail-summary::-webkit-details-marker {
+  display: none;
+}
+
+.detail-summary::after {
+  content: "+";
+  flex-shrink: 0;
+  width: 1.35rem;
+  height: 1.35rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  background: var(--blue-50);
+  color: var(--blue-600);
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1;
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+
+.detail-item[open] .detail-summary::after {
+  content: "−";
+  background: var(--blue-100);
+}
+
+.detail-summary:hover {
+  color: var(--blue-700);
+}
+
+.detail-body {
+  padding: 0 1rem 1rem;
+  border-top: 1px solid var(--blue-50);
+}
+
+.detail-body p {
+  margin: 0.85rem 0 0;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: var(--text-muted);
+}
+
+.detail-body em {
+  font-style: normal;
+  font-weight: 600;
+  color: var(--blue-900);
+}
+
+.detail-body code {
+  font-family: ui-monospace, "SF Mono", Menlo, monospace;
+  font-size: 0.85em;
+  padding: 0.1em 0.35em;
+  border-radius: 4px;
+  background: var(--blue-50);
+  color: var(--blue-700);
+}
+
 /* Dichotomy */
 .dichotomy {
   padding: 1.5rem;
