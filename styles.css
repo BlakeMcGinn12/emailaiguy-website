@@ -10,6 +10,11 @@
   --blue-700: #2d6aa8;
   --blue-900: #1e3f66;
   --teal: #5ec4d4;
+  --teal-50: #eefaf9;
+  --teal-700: #2a8f96;
+  --amber-50: #fff8ed;
+  --amber-200: #f5d9a8;
+  --amber-700: #9a6b1a;
   --text: #1a334d;
   --text-muted: #5a7a96;
   --border: rgba(74, 143, 212, 0.18);
@@ -228,40 +233,168 @@ a {
   color: var(--blue-600);
 }
 
-/* Thesis */
-.thesis-card {
+/* Dichotomy */
+.dichotomy {
   padding: 1.5rem;
   border-radius: calc(var(--radius) + 4px);
   border: 1px solid var(--border);
-  background: linear-gradient(145deg, #ffffff 0%, var(--blue-50) 55%, rgba(94, 196, 212, 0.08) 100%);
+  background: #fff;
   box-shadow: var(--shadow);
 }
 
-.thesis-headline {
+.dichotomy-headline {
   margin: 0;
   font-size: clamp(1.35rem, 3.5vw, 1.65rem);
   font-weight: 700;
   line-height: 1.2;
   letter-spacing: -0.02em;
   color: var(--blue-900);
+  text-align: center;
 }
 
-.thesis-body {
-  margin-top: 1.1rem;
-}
-
-.thesis-body p {
-  margin: 0 0 1rem;
+.dichotomy-intro {
+  margin: 0.85rem auto 0;
+  max-width: 34rem;
   font-size: 1rem;
+  line-height: 1.55;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+.dichotomy-split {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+  margin-top: 1.5rem;
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+
+.dichotomy-panel {
+  padding: 1.25rem 1.35rem;
+}
+
+.dichotomy-panel--consumer {
+  background: linear-gradient(160deg, var(--teal-50) 0%, #fff 100%);
+  border-bottom: 1px solid rgba(94, 196, 212, 0.25);
+}
+
+.dichotomy-panel--business {
+  background: linear-gradient(200deg, var(--amber-50) 0%, #fff 100%);
+}
+
+.dichotomy-panel-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.85rem;
+}
+
+.dichotomy-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 50%;
+  font-size: 1.1rem;
+  font-weight: 700;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.dichotomy-panel--consumer .dichotomy-icon {
+  background: rgba(94, 196, 212, 0.25);
+  color: var(--teal-700);
+}
+
+.dichotomy-panel--business .dichotomy-icon {
+  background: rgba(245, 217, 168, 0.55);
+  color: var(--amber-700);
+}
+
+.dichotomy-label {
+  margin: 0;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.dichotomy-panel--consumer .dichotomy-label {
+  color: var(--teal-700);
+}
+
+.dichotomy-panel--business .dichotomy-label {
+  color: var(--amber-700);
+}
+
+.dichotomy-sublabel {
+  margin: 0.1rem 0 0;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--blue-900);
+}
+
+.dichotomy-text {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.6;
   color: #2f5575;
 }
 
-.thesis-body p:last-child {
-  margin-bottom: 0;
+.dichotomy-text em {
+  font-style: normal;
+  font-weight: 600;
+  color: var(--blue-900);
 }
 
-.thesis-body strong {
-  color: var(--blue-900);
+.dichotomy-text code {
+  font-family: ui-monospace, "SF Mono", Menlo, monospace;
+  font-size: 0.85em;
+  padding: 0.1em 0.35em;
+  border-radius: 4px;
+  background: rgba(154, 107, 26, 0.1);
+  color: var(--amber-700);
+}
+
+.dichotomy-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem;
+  background: linear-gradient(90deg, var(--teal-50), #fff 50%, var(--amber-50));
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.dichotomy-vs {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  background: #fff;
+  border: 1px solid var(--border);
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  box-shadow: 0 2px 8px rgba(45, 106, 168, 0.08);
+}
+
+.dichotomy-close {
+  margin: 1.25rem 0 0;
+  font-size: 0.95rem;
+  line-height: 1.55;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+.dichotomy .secondary-btn {
+  display: flex;
+  width: fit-content;
+  margin: 1.25rem auto 0;
 }
 
 .secondary-btn {
@@ -330,7 +463,31 @@ a {
     padding: 2.5rem 1.5rem 3.5rem;
   }
 
-  .thesis-card {
+  .dichotomy {
     padding: 2rem;
+  }
+
+  .dichotomy-split {
+    grid-template-columns: 1fr auto 1fr;
+    align-items: stretch;
+  }
+
+  .dichotomy-panel--consumer {
+    border-bottom: none;
+    border-right: none;
+  }
+
+  .dichotomy-divider {
+    flex-direction: column;
+    padding: 0 0.35rem;
+    border-top: none;
+    border-bottom: none;
+    border-left: 1px solid var(--border);
+    border-right: 1px solid var(--border);
+    background: linear-gradient(180deg, var(--teal-50), #fff 50%, var(--amber-50));
+  }
+
+  .dichotomy-panel {
+    padding: 1.5rem;
   }
 }

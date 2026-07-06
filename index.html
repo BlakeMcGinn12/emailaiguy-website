@@ -53,18 +53,19 @@
 
       <main class="main">
         <section class="section">
-          <p class="eyebrow">Free skill</p>
-          <h2 class="headline">Train your agent on how you read email.</h2>
+          <p class="eyebrow">Free thing I built</p>
+          <h2 class="headline">Swipe your inbox. Teach your agent.</h2>
           <p class="lede">
-            Email Swipe is a Tinder-style inbox trainer. Swipe spam, keep, or flag what matters — your
-            agent learns from the patterns, not a giant preferences dump.
+            Email Swipe is stupid simple: left for junk, right for keep, double-tap if it actually
+            matters. You swipe through real mail for a few minutes — your agent picks up how you think,
+            without you writing a 50-rule preferences doc.
           </p>
 
           <div class="prompt-card">
             <div class="prompt-card-top">
               <div>
                 <p class="prompt-label">Paste this into your agent</p>
-                <p class="prompt-hint">Cursor, OpenClaw, Claude — your agent finds the rest on GitHub</p>
+                <p class="prompt-hint">Cursor, OpenClaw, Claude — it'll grab the rest from GitHub</p>
               </div>
               <button type="button" class="copy-btn" id="copy-btn" aria-live="polite">
                 <span class="copy-btn-icon" aria-hidden="true">⎘</span>
@@ -75,38 +76,61 @@
           </div>
 
           <p class="fine-print">
-            Open source on
+            It's on
             <a href="https://github.com/EmailGuy42069/email-swipe" target="_blank" rel="noopener noreferrer"
               >GitHub</a
-            >. No account required. Your swipes stay local.
+            >. Free. Your swipes stay on your machine.
           </p>
         </section>
 
-        <section class="section thesis-card">
-          <h2 class="thesis-headline">Email is becoming a space of perfect information.</h2>
-          <div class="thesis-body">
-            <p>
-              Most people assume AI in email means more spam — louder blasts, worse filters, everyone
-              shouting at once. The counterintuitive part: both sides of the inbox get smarter at the
-              same time.
-            </p>
-            <p>
-              <strong>On the consumer side,</strong> AI sorting gets better at knowing what you actually
-              want. Your inbox stops being a firehose. Noise gets filtered before it lands. What reaches
-              you is increasingly mail that matches your interests — not because senders sent less, but
-              because the wrong messages never show up.
-            </p>
-            <p>
-              <strong>On the business side,</strong> personalization replaces one-size-fits-all blasts.
-              Senders learn what each audience segment cares about and tailor messages to real interests —
-              not fake merge tags, but relevance built from how people actually engage.
-            </p>
-            <p>
-              When sorting gets sharper and sending gets more specific, email becomes a high-signal channel
-              for everyone. That&apos;s the opportunity — not more volume, but better matching on both
-              ends.
-            </p>
+        <section class="section dichotomy">
+          <h2 class="dichotomy-headline">Email is becoming a space of perfect information.</h2>
+          <p class="dichotomy-intro">
+            Everyone thinks AI in email = more spam. I think the opposite — but only if both sides of
+            the inbox get smarter at the same time.
+          </p>
+
+          <div class="dichotomy-split">
+            <article class="dichotomy-panel dichotomy-panel--consumer">
+              <div class="dichotomy-panel-header">
+                <span class="dichotomy-icon" aria-hidden="true">↓</span>
+                <div>
+                  <p class="dichotomy-label">Consumer side</p>
+                  <p class="dichotomy-sublabel">Your inbox</p>
+                </div>
+              </div>
+              <p class="dichotomy-text">
+                AI sorting gets better at knowing what <em>you</em> actually want. The junk never lands.
+                Your inbox stops feeling like a firehose — not because people sent less, but because the
+                wrong stuff got filtered out before you saw it.
+              </p>
+            </article>
+
+            <div class="dichotomy-divider" aria-hidden="true">
+              <span class="dichotomy-vs">↔</span>
+            </div>
+
+            <article class="dichotomy-panel dichotomy-panel--business">
+              <div class="dichotomy-panel-header">
+                <span class="dichotomy-icon" aria-hidden="true">↑</span>
+                <div>
+                  <p class="dichotomy-label">Business side</p>
+                  <p class="dichotomy-sublabel">Your audience</p>
+                </div>
+              </div>
+              <p class="dichotomy-text">
+                Senders stop blasting one message to everyone. They learn what each group actually cares
+                about and write to real interests — not fake <code>{first_name}</code> merge tags, but
+                emails that feel like they were meant for you.
+              </p>
+            </article>
           </div>
+
+          <p class="dichotomy-close">
+            Better sorting on one end. Better targeting on the other. That's how email becomes
+            high-signal instead of more noise.
+          </p>
+
           <a
             class="secondary-btn"
             href="https://x.com/EmailAIguy"
