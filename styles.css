@@ -249,6 +249,13 @@ a {
   color: var(--text-muted);
 }
 
+.skill-details-intro {
+  margin: 0 0 1rem;
+  font-size: 0.88rem;
+  line-height: 1.55;
+  color: var(--text-muted);
+}
+
 .detail-item {
   border: 1px solid var(--blue-100);
   border-radius: 12px;
@@ -336,6 +343,18 @@ a {
 
 .detail-body li + li {
   margin-top: 0.35rem;
+}
+
+.detail-body ol.detail-steps {
+  margin: 0.65rem 0 0;
+  padding-left: 1.25rem;
+  font-size: 0.88rem;
+  line-height: 1.55;
+  color: var(--text-muted);
+}
+
+.detail-body ol.detail-steps li + li {
+  margin-top: 0.4rem;
 }
 
 .detail-body li strong {
